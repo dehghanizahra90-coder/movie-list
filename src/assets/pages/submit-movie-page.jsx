@@ -1,18 +1,77 @@
 import React from "react";
 import { useState } from "react";
-import { Button, Checkbox, Form, Input, Slider } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Slider,
+  DatePicker,
+  Select,
+} from "antd";
+import instance from "../utilites/api";
 
 export default function FormSend() {
   const [inputValue, setInputValue] = useState(1);
-  const onChange = (newValue) => {
+  const [rottenTomatoes, setRottenTomatoes] = useState(0);
+  const [metaScore, setMetaScore] = useState(0);
+  const [form] = Form.useForm();
+
+  const onChangeImdb = (newValue) => {
     setInputValue(newValue);
   };
-  const onFinish = (values) => {
+  const onChangeRotten = (newValue) => {
+    setRottenTomatoes(newValue);
+    console.log(newValue);
+    // console.log(rottenTomatoes);
+  };
+  const onChangeMeta = (newValue) => {
+    setMetaScore(newValue);
+  };
+  function formatDate(date) {
+    const d = new Date(date);
+
+    const day = String(d.getDate()).padStart(2, "0");
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
+
+    return `${day} ${month} ${year}`;
+  }
+  const ratings =[
+    { Value: `${inputValue}/10`, Source: "Internet Movie Database" },
+    { Value: `${rottenTomatoes}%`, Source: "Rotten Tomatoes" },
+    { Value: `${metaScore}/100`, Source: "Metacritic" },
+  ];
+
+  const onFinish = async (values) => {
     console.log("Success:", values);
+    const respon = await instance.post("movies/multi", {
+      ...values,
+      title: values.title,
+      dvd: formatDate(new Date(values.dvd)),
+      ratings: ratings,
+      imdb_rating:toString(values.imdb_rating),
+      metascore:toString(values.metascore)
+    });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   return (
     <Form
       name="basic"
@@ -23,6 +82,7 @@ export default function FormSend() {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      form={form}
     >
       <Form.Item
         label="title"
@@ -69,17 +129,43 @@ export default function FormSend() {
         label="imdb_rating"
         name="imdb_rating"
         rules={[
-          { required: true, message: "Please input  imdb_rating of Film  ," },
+          { required: true, message: "Please input  imdb_rating of Film" },
         ]}
       >
         <Slider
           min={1}
           max={10}
-          onChange={onChange}
+          onChange={onChangeImdb}
           value={typeof inputValue === "number" ? inputValue : 0}
           step={0.1}
         />
-        {/* <Input /> */}
+      </Form.Item>
+      <Form.Item
+        label="Rotten_Tomatoes"
+        name="Rotten_Tomatoes"
+        rules={[{ required: false, message: "Please input  Rotten of Film" }]}
+      >
+        <Slider
+          min={1}
+          max={100}
+          onChange={onChangeRotten}
+          value={typeof rottenTomatoes === "number" ? rottenTomatoes : 0}
+          step={1}
+        />
+        <div>{rottenTomatoes}%</div>
+      </Form.Item>
+      <Form.Item
+        label="metascore"
+        name="metascore"
+        rules={[{ required: true, message: "Please input  metascore of Film" }]}
+      >
+        <Slider
+          min={1}
+          max={100}
+          onChange={onChangeMeta}
+          value={typeof metaScore === "number" ? metaScore : 0}
+          step={1}
+        />
       </Form.Item>
       <Form.Item
         label="imdb_votes"
@@ -95,14 +181,26 @@ export default function FormSend() {
         name="poster"
         rules={[{ required: true, message: "Please input poster of Film " }]}
       >
-        <Input />
+        <Input type="file" />
       </Form.Item>
       <Form.Item
         label="rated"
         name="rated"
         rules={[{ required: true, message: "Please input rated of Film " }]}
       >
-        <Input />
+        <Select
+          placeholder="Select Rated"
+          filterOption={(input, option) =>
+            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+          }
+          options={[
+            { value: "1", label: "G" },
+            { value: "2", label: "PG" },
+            { value: "3", label: "PG-13" },
+            { value: "4", label: "R" },
+            { value: "5", label: "NC-17" },
+          ]}
+        />
       </Form.Item>
       <Form.Item
         label="actors"
@@ -151,7 +249,7 @@ export default function FormSend() {
         name="dvd"
         rules={[{ required: true, message: "Please input dvd of Film " }]}
       >
-        <Input />
+        <DatePicker />
       </Form.Item>
       <Form.Item
         label="box_office"
@@ -162,13 +260,13 @@ export default function FormSend() {
       >
         <Input />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="ratings"
         name="ratings"
         rules={[{ required: true, message: "Please input ratings of Film " }]}
       >
         <Input />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item name="remember" valuePropName="checked" label={null}>
         <Checkbox>Remember me</Checkbox>
