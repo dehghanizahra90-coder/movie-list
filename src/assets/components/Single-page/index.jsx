@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import instance from "../../utilites/api";
 import { ListMovie } from "../movie-list/list-film";
 import { useParams } from "react-router-dom";
@@ -22,5 +22,10 @@ export function SingleMovie() {
     [movie_id]
   );
 
-  return <h1>{singleMovie.title}</h1>;
+  return (
+    <Fragment>
+      <h1>{singleMovie.title}</h1>
+      <img src={singleMovie.poster} />
+    </Fragment>
+  );
 }

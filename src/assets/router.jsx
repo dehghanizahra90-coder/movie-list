@@ -5,6 +5,7 @@ import { PrimaryLayout } from "./components/primary-layout/primary-layout";
 import { HomePage } from "./pages/home-page";
 import FormSend from "./pages/submit-movie-page";
 import { SingleMovie } from "./components/Single-page";
+import App from "./pages/formtest";
 export function Router() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ export function Router() {
         <Route element={<PrimaryLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/form" element={<FormSend />} />
+          <Route path="/form2" element={<App />} />
           <Route path="movies/:movie_id" element={<SingleMovie />} />
           {/* <Route path="register" element={<Register />} /> */}
         </Route>
