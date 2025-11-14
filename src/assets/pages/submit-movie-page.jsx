@@ -1,111 +1,72 @@
-import React from "react";
-import { useState } from "react";
-import { Button, Checkbox, Form, Input, Slider, Select, Upload } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Slider,
+  Select,
+  DatePicker,
+  Upload,
+} from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import instance from "../utilites/api";
+import formatDate from "../utilites/change-date";
+import changeArryToString from "../utilites/arry-to-string";
+import convertRate from "../utilites/convert-rate";
 
 export default function FormSend() {
+  const [fileList, setFileList] = useState([]);
   const [inputValue, setInputValue] = useState(1);
   const [rottenTomatoes, setRottenTomatoes] = useState(0);
   const [metaScore, setMetaScore] = useState(0);
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-  const uploadButton = (
-    <button style={{ border: 0, background: "none" }} type="button">
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>UploadImage</div>
-    </button>
-  );
-
   const onChangeImdb = (newValue) => {
     setInputValue(newValue);
+    console.log(inputValue);
   };
-  const onChangeRotten = (newValue) => {
-    setRottenTomatoes(newValue);
-    form.setFieldsValue({ Rotten_Tomatoes: newValue });
-    console.log(newValue);
-    // console.log(rottenTomatoes);
+  const onChangeRotten = (value) => {
+    setRottenTomatoes(value);
+    form.setFieldsValue({ Rotten_Tomatoes: value });
   };
   const onChangeMeta = (newValue) => {
     setMetaScore(newValue);
   };
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
-    
+
+  const props = {
+    beforeUpload: (file) => {
+      console.log([file]);
+      setFileList([file]);
+      return false;
+    },
+    onRemove: () => {
+      setFileList([]);
+    },
+    multiple: false,
   };
+  useEffect(() => {
+    form.setFieldsValue({ Rotten_Tomatoes: rottenTomatoes });
+  }, [form, rottenTomatoes]);
+
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
+      alert("You can only upload JPG/PNG file!");
+      return;
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
+      alert("Image must smaller than 2MB!");
+      return;
     }
     return isJpgOrPng && isLt2M;
   };
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      console.log(info.file.status);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      console.log("info");
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-  // const props = {
-  //   name: "file",
-  //   headers: {
-  //     authorization: "authorization-text",
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status !== "uploading") {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (info.file.status === "done") {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === "error") {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
-  function formatDate(date) {
-    const d = new Date(date);
 
-    const day = String(d.getDate()).padStart(2, "0");
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = months[d.getMonth()];
-    const year = d.getFullYear();
-
-    return `${day} ${month} ${year}`;
-  }
   const ratings = [
     { Value: `${inputValue}/10`, Source: "Internet Movie Database" },
     { Value: `${rottenTomatoes}%`, Source: "Rotten Tomatoes" },
     { Value: `${metaScore}/100`, Source: "Metacritic" },
-  ]
+  ];
   const onFinish = async (values) => {
     console.log("Successss:", values);
     console.log(values.imdb_rating, typeof values.imdb_rating);
@@ -114,37 +75,58 @@ export default function FormSend() {
       typeof values.imdb_rating.toString()
     );
 
-    await instance.post("movies/multi", {
-      ...values,
-      title: values.title,
-      dvd: formatDate(new Date(values.dvd)),
-      ratings: JSON.stringify(ratings),
-      imdb_rating: values.imdb_rating.toString(),
-      metascore: values.metascore.toString(),
-    });
+    if (fileList.length === 0) {
+      alert("Please select a poster file before submitting.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      const valuesArry = Object.entries(values);
+      valuesArry.map(function ([key, value]) {
+        return formData.append(key, value);
+      });
+      formData.append("actors", changeArryToString(values.actors));
+      formData.append("language", changeArryToString(values.language));
+      formData.append("country", changeArryToString(values.country));
+      formData.append("director", changeArryToString(values.director));
+      formData.append("awards", changeArryToString(values.awards));
+      formData.append("dvd", formatDate(values.dvd));
+      formData.append("rated", convertRate(values.rated));
+      console.log(JSON.stringify(ratings));
+      formData.append("Rating", JSON.stringify(ratings));
+      formData.append("poster", fileList[0], `${values.imdb_id}.jpg`);
+
+      await instance.post("movies/multi", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Movie uploaded successfully!");
+    } catch (error) {
+      console.log(error.response);
+    }
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
   return (
     <Form
-      name="basic"
       labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
       form={form}
+      onFinishFailed={onFinishFailed}
     >
       <Form.Item
         label="title"
         name="title"
         rules={[{ required: true, message: "Please input your title!" }]}
       >
-        <Input />
+        <Input placeholder="Please input your title!" />
       </Form.Item>
       <Form.Item
         label="imdb_id"
@@ -158,7 +140,7 @@ export default function FormSend() {
         name="country"
         rules={[{ required: true, message: "Please input country!" }]}
       >
-        <Input />
+        <Select mode="tags" allowClear style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="year"
@@ -167,7 +149,7 @@ export default function FormSend() {
       >
         <Input />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         label="director"
         name="director"
         rules={[
@@ -177,8 +159,8 @@ export default function FormSend() {
           },
         ]}
       >
-        <Input />
-      </Form.Item> */}
+        <Select mode="tags" allowClear style={{ width: "100%" }} />
+      </Form.Item>
       <Form.Item
         label="imdb_rating"
         name="imdb_rating"
@@ -193,21 +175,21 @@ export default function FormSend() {
           value={typeof inputValue === "number" ? inputValue : 0}
           step={0.1}
         />
-      </Form.Item>     
+      </Form.Item>
       <Form.Item
-        label="Rotten_Tomatoes"
+        label="Rotten Tomatoes"
         name="Rotten_Tomatoes"
-        rules={[{ required: true, message: "Please input  Rotten of Film" }]}
+        rules={[{ required: true, message: "Please input Rotten of Film" }]}
       >
         <Slider
           min={1}
           max={100}
-          onChange={onChangeRotten}
-          value={typeof rottenTomatoes === "number" ? rottenTomatoes : 0}
           step={1}
+          onChange={onChangeRotten}
+          value={rottenTomatoes}
         />
-        <div>{rottenTomatoes}%</div>
       </Form.Item>
+      <div style={{ marginBottom: 16 }}>{rottenTomatoes}%</div>
       <Form.Item
         label="metascore"
         name="metascore"
@@ -228,9 +210,8 @@ export default function FormSend() {
           { required: true, message: "Please input imdb_votes of Film " },
         ]}
       >
-        <Input />
+        <Input placeholder="Please input imdb_votes of Film " />
       </Form.Item>
-      Z
       <Form.Item
         label="rated"
         name="rated"
@@ -238,11 +219,8 @@ export default function FormSend() {
       >
         <Select
           placeholder="Select Rated"
-          // filterOption={(input, option) =>
-          //   (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          // }
           options={[
-            { value: "1", label: "G" },
+            { value: "G", label: "G" },
             { value: "2", label: "PG" },
             { value: "3", label: "PG-13" },
             { value: "4", label: "R" },
@@ -250,12 +228,12 @@ export default function FormSend() {
           ]}
         />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         label="actors"
         name="actors"
         rules={[{ required: true, message: "Please input actors of Film " }]}
       >
-        <Input />
+        <Select mode="tags" allowClear style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="runtime"
@@ -269,9 +247,9 @@ export default function FormSend() {
         name="language"
         rules={[{ required: true, message: "Please input language of Film " }]}
       >
-        <Input />
-      </Form.Item> */}
-      {/* <Form.Item
+        <Select mode="tags" allowClear style={{ width: "100%" }} />
+      </Form.Item>
+      <Form.Item
         label="plot"
         name="plot"
         rules={[{ required: true, message: "Please input plot of Film " }]}
@@ -290,7 +268,7 @@ export default function FormSend() {
         name="awards"
         rules={[{ required: true, message: "Please input awards of Film " }]}
       >
-        <Input />
+        <Select mode="tags" allowClear style={{ width: "100%" }} />
       </Form.Item>
       <Form.Item
         label="dvd"
@@ -306,35 +284,11 @@ export default function FormSend() {
           { required: true, message: "Please input box_office of Film " },
         ]}
       >
-        <Input />
-      </Form.Item> */}
-       <Form.Item
-        label="poster"
-        name="poster"
-        rules={[
-          { required: true, message: "Please input  imdb_rating of Film" },
-        ]}
-      >
-        <Upload
-          // {...props}
-          name="poster"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          // action="https://moviesapi.codingfront.dev/api/v1/movies/multi"
-          // beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <img
-              draggable={false}
-              src={imageUrl}
-              alt="avatar"
-              style={{ width: "100%" }}
-            />
-          ) : (
-            uploadButton
-          )}
+        <Input prefix="$" />
+      </Form.Item>
+      <Form.Item label="Poster">
+        <Upload {...props} fileList={fileList} beforeUpload={beforeUpload}>
+          <Button icon={<UploadOutlined />}>Click to Upload Poster</Button>
         </Upload>
       </Form.Item>
       <Form.Item name="remember" valuePropName="checked" label={null}>
