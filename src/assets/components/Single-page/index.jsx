@@ -25,6 +25,23 @@ export function SingleMovie() {
   return (
     <Fragment>
       <h1>{singleMovie.title}</h1>
+      <h3>{singleMovie.actors}</h3>
+      <h3>{singleMovie.awards}</h3>
+      <h3>{singleMovie.box_office}</h3>
+      <h3>{singleMovie.country}</h3>
+      <h3>{singleMovie.director}</h3>
+      <h3>{singleMovie.dvd}</h3>
+      <h3>{singleMovie.imdb_id}</h3>
+      <h3>{singleMovie.imdb_votes}</h3>
+      <h3>{singleMovie.language}</h3>
+      <h3>{singleMovie.plot}</h3>
+      <h3>{singleMovie.rated}</h3>
+      <h3>{singleMovie.ratings}</h3>
+      <h3>{singleMovie.released}</h3>
+      <h3>{singleMovie.runtime}</h3>
+      <h3>{singleMovie.writer}</h3>
+      <h3>{singleMovie.year}</h3>
+      <img src={singleMovie.user_cover} />
       <img src={singleMovie.poster} />
     </Fragment>
   );
