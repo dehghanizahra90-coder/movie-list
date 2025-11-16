@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export function SingleMovie() {
   const { movie_id } = useParams();
-  const [singleMovie, setSingleMovie] = useState({ title: "" });
+  const [singleMovie, setSingleMovie] = useState([]);
   async function getApi() {
     try {
       const respon = await instance.get(`movies/${movie_id}`);
@@ -24,7 +24,32 @@ export function SingleMovie() {
 
   return (
     <Fragment>
-      <h1>{singleMovie.title}</h1>
+      {singleMovie.map(function ({
+        title,
+        actors,
+        box_office,
+        country,
+        dvd,
+        director,
+        imdb_id,
+        poster,
+        imdb_votes,
+        user_cover,
+        language,
+        plot,
+        writer,
+        year,
+        runtime,
+        released,
+        ratings,
+        rated,
+        awards,
+      }) {
+        return (
+          <img src={user_cover} />
+        )
+      })}
+      {/* <h1>{singleMovie.title}</h1>
       <h3>{singleMovie.actors}</h3>
       <h3>{singleMovie.awards}</h3>
       <h3>{singleMovie.box_office}</h3>
@@ -42,7 +67,7 @@ export function SingleMovie() {
       <h3>{singleMovie.writer}</h3>
       <h3>{singleMovie.year}</h3>
       <img src={singleMovie.user_cover} />
-      <img src={singleMovie.poster} />
+      <img src={singleMovie.poster} /> */}
     </Fragment>
   );
 }
