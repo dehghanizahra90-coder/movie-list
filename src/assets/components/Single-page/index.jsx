@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import instance from "../../utilites/api";
 import { ListMovie } from "../movie-list/list-film";
 import { useParams } from "react-router-dom";
+import style from "./single-page.style.module.css";
 
 export function SingleMovie() {
   const { movie_id } = useParams();
@@ -21,53 +22,39 @@ export function SingleMovie() {
     },
     [movie_id]
   );
+  const {
+    title,
+    actors,
+    box_office,
+    country,
+    dvd,
+    director,
+    imdb_id,
+    poster,
+    imdb_votes,
+    user_cover,
+    language,
+    plot,
+    writer,
+    year,
+    runtime,
+    released,
+    ratings,
+    rated,
+    awards,
+    images = [],
+  } = singleMovie;
 
   return (
     <Fragment>
-      {singleMovie.map(function ({
-        title,
-        actors,
-        box_office,
-        country,
-        dvd,
-        director,
-        imdb_id,
-        poster,
-        imdb_votes,
-        user_cover,
-        language,
-        plot,
-        writer,
-        year,
-        runtime,
-        released,
-        ratings,
-        rated,
-        awards,
-      }) {
-        return (
-          <img src={user_cover} />
-        )
-      })}
-      {/* <h1>{singleMovie.title}</h1>
-      <h3>{singleMovie.actors}</h3>
-      <h3>{singleMovie.awards}</h3>
-      <h3>{singleMovie.box_office}</h3>
-      <h3>{singleMovie.country}</h3>
-      <h3>{singleMovie.director}</h3>
-      <h3>{singleMovie.dvd}</h3>
-      <h3>{singleMovie.imdb_id}</h3>
-      <h3>{singleMovie.imdb_votes}</h3>
-      <h3>{singleMovie.language}</h3>
-      <h3>{singleMovie.plot}</h3>
-      <h3>{singleMovie.rated}</h3>
-      <h3>{singleMovie.ratings}</h3>
-      <h3>{singleMovie.released}</h3>
-      <h3>{singleMovie.runtime}</h3>
-      <h3>{singleMovie.writer}</h3>
-      <h3>{singleMovie.year}</h3>
-      <img src={singleMovie.user_cover} />
-      <img src={singleMovie.poster} /> */}
+      <div className={style.content}>
+        <h1>Title:{title}</h1>
+        <h2>Director:{director}</h2>
+        <h2>Country:{country}</h2>
+        <h2>Writer:{writer}</h2>
+      </div>
+
+      <img src={images[0]} />
     </Fragment>
   );
 }
