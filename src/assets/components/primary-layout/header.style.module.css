@@ -1,0 +1,58 @@
+@font-face {
+  font-family: vazirmatn;
+  src: url("/font/Vazirmatn-SemiBold.woff2") format("woff2");
+}
+body {
+  direction: rtl;
+  color: #f5f4f4;
+  font-family: "vazirmatn", sans-serif;
+  margin: 0;
+}
+/* .container {
+  width: 70%;
+} */
+.header {
+  display: grid;
+  grid-template-columns: 6rem auto max-content;
+  font-size: 14px;
+  padding: 15px 125px;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40px;
+  align-items: center;
+}
+.menu .menu_list {
+  display: flex;
+  gap: 20px;
+}
+.menu .menu_list .menu_list_sub {
+  display: flex;
+  align-items: center;
+}
+.register {
+  display: flex;
+  align-items: center;
+}
+.register button {
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "vazirmatn";
+  padding: 4px 14px;
+  font-size: 14px;
+}
+.register .sell {
+  background-color: #ededed;
+  border: 1px solid #ededed;
+  margin: 0 24px;
+}
+.register .inter {
+  background-color: #8f8f80;
+  border: 1px solid #8f8f80;
+  color: #fff;
+}

@@ -1,7 +1,6 @@
 import { ListMovie } from "./list-film";
 import { useEffect, useState } from "react";
 import instance from "../../utilites/api";
-import { Pagination } from "./pagination";
 
 export function Movie() {
   const [movies, setMovies] = useState({

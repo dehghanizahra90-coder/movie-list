@@ -1,16 +1,21 @@
-import { Col, Divider, Row } from "antd";
+import style from "./movie.style.module.css";
 
-export function ListMovie(data) {
+export function ListMovie({ data }) {
   return (
-    <Row gutter={16}>
-      {data.data.map(function ({ id, poster, title }) {
-        <Col className="gutter-row" span={6} key={id}>
-          <li>
-            <h6>{title}</h6>
-            <img src={poster} />
-          </li>
-        </Col>;
-      })}
-    </Row>
+    <div className={style.vige}>
+      <p>ویژه</p>
+      <ul>
+        {data.data.map(function ({ id, images, title }) {
+          return (
+            <li key={id}>
+              <img src={images[0]} />
+              <div className={style.info}>
+                <h6>{title}</h6>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
