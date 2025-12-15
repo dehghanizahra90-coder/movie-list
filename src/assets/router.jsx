@@ -7,7 +7,7 @@ import FormSend from "./pages/submit-movie-page";
 import { SingleMovie } from "./components/Single-page";
 import { ShowGenres } from "./components/genres/category-genres";
 import { Movie } from "./components/movie-list/movie";
-import { MovieList } from "./components/list-movie-componenet/list-movie";
+import { MovieListCard } from "./components/list-movie-componenet/list-movie";
 export function Router() {
   return (
     <BrowserRouter>
@@ -16,7 +16,7 @@ export function Router() {
           <Route path="/" element={<HomePage />} />
           <Route path="/form" element={<FormSend />} />
           <Route path="/form2" element={<Movie />} />
-          <Route path="/movieList" element={<MovieList />} />
+          <Route path="/movieList" element={<MovieListCard />} />
           <Route path="/genres" element={<ShowGenres />} />
           <Route path="movies/:movie_id" element={<SingleMovie />} />
           {/* <Route path="register" element={<Register />} /> */}

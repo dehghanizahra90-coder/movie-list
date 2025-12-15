@@ -13,3 +13,11 @@ body {
   font-family: "vazirmatn", sans-serif;
   margin: 0;
 }
+.mg56 {
+  margin: 56px 0;
+}
+.flex {
+  display: flex;
+  /* gap: 5px; */
+  align-items: center;
+}

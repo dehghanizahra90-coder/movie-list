@@ -4,15 +4,13 @@ import { Col, Row, Tooltip, Typography } from "antd";
 import style from "./list-movie.style.module.css";
 import { convertMinutesStr } from "../../utilites/convertmintohour";
 
-const { Text } = Typography;
-
-export function MovieList() {
+export function MovieListCard({ page }) {
   const [movie, setMovie] = useState([]);
   const [filmInfo, setFilmInfo] = useState();
   const [activeId, setActiveId] = useState();
 
-  async function getApi(page = 1) {
-    const responsiv = await instance.get("movies?page={page}");
+  async function getApi(page) {
+    const responsiv = await instance.get(`movies?page=${page}`);
     try {
       setMovie(responsiv.data.data);
     } catch (e) {
@@ -31,7 +29,7 @@ export function MovieList() {
   }
 
   useEffect(function () {
-    getApi();
+    getApi(page);
   }, []);
   return (
     // <Carousel>
