@@ -1,18 +1,15 @@
-/* @font-face {
-  font-family: vazirmatn;
-  src: url("/font/Vazirmatn-SemiBold.woff2") format("woff2");
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 body {
   direction: rtl;
   color: #f5f4f4;
   font-family: "vazirmatn", sans-serif;
+  margin: 0;
 }
-a {
-  text-decoration: none;
-}
-h5 {
-  font-family: "vazirmatn", sans-serif;
-}
-.container {
-  width: 70%;
-} */
