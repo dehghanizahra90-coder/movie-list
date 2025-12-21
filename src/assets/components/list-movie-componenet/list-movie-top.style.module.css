@@ -1,3 +1,12 @@
+.card {
+  width: 560px;
+}
+.row {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+}
+
 .movieList {
   position: relative;
   width: 100%;
@@ -6,9 +15,6 @@
   margin: 0 auto;
   margin-top: 8px;
   margin-bottom: 8px;
-}
-.card {
-  width: 200px;
 }
 .movieList img {
   width: 100%;
@@ -48,12 +54,3 @@
 .info h5 {
   margin: 10px 0;
 }
-/* .view {
-  overflow: hidden;
-  width: 100%;
-} */
-
-/* .track {
-  transition: transform 0.4s ease;
-  will-change: transform;
-} */
