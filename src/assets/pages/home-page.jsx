@@ -6,7 +6,7 @@ import { MovieListCard } from "../components/list-movie-componenet/list-movie";
 import "../../assets/global.css";
 import { SingleMovieCard } from "../components/list-movie-componenet/single-movie";
 import { Link } from "react-router-dom";
-import { TopMovieCard } from "../components/list-movie-componenet/list-movie-top";
+// import { TopMovieCard } from "../components/list-movie-componenet/list-movie-top";
 
 export function HomePage() {
   return (
@@ -50,7 +50,7 @@ export function HomePage() {
         </div>
         <MovieListCard page={2} />
       </div>
-      <TopMovieCard />
+      {/* <TopMovieCard /> */}
     </Fragment>
   );
 }
