@@ -20,7 +20,7 @@ export function Router() {
           <Route path="/form2" element={<Movie />} />
           <Route path="/form3" element={<TopMovieCard />} />
           <Route path="/movieList" element={<MovieListCard />} />
-          <Route path="/genress" element={<ShowGenress />} />
+          <Route path="/genres/:name" element={<ShowGenress />} />
           <Route path="/genres" element={<ShowGenres />} />
           <Route path="movies/:movie_id" element={<SingleMovie />} />
           {/* <Route path="register" element={<Register />} /> */}
