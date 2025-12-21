@@ -50,7 +50,10 @@ export function HomePage() {
         </div>
         <MovieListCard page={2} />
       </div>
-      <TopMovieCard page={10} />
+      <div className="container">
+        <h2>پیشنهاد ویژه</h2>
+        <TopMovieCard page={10} />
+      </div>
     </Fragment>
   );
 }

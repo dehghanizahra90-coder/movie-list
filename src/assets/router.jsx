@@ -9,6 +9,7 @@ import { ShowGenres } from "./components/genres/category-genres";
 import { Movie } from "./components/movie-list/movie";
 import { MovieListCard } from "./components/list-movie-componenet/list-movie";
 import { TopMovieCard } from "./components/list-movie-componenet/list-movie-top";
+import { ShowGenress } from "./Hook/show-genres";
 export function Router() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ export function Router() {
           <Route path="/form2" element={<Movie />} />
           <Route path="/form3" element={<TopMovieCard />} />
           <Route path="/movieList" element={<MovieListCard />} />
+          <Route path="/genress" element={<ShowGenress />} />
           <Route path="/genres" element={<ShowGenres />} />
           <Route path="movies/:movie_id" element={<SingleMovie />} />
           {/* <Route path="register" element={<Register />} /> */}

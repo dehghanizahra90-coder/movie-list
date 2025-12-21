@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import instance from "../../utilites/api";
-import { ListMovie } from "../movie-list/list-film";
+import { RelatedMovie } from "../related-movie/related-movie";
 import { useParams } from "react-router-dom";
 import style from "./single-page.style.module.css";
 
@@ -47,14 +47,19 @@ export function SingleMovie() {
 
   return (
     <Fragment>
-      <div className={style.content}>
+      <div className={style.single_movie}>
+        <img src={images[0]} className={style.img_single} />
+      </div>
+      <div className={style.contents}>
         <h1>Title:{title}</h1>
         <h2>Director:{director}</h2>
         <h2>Country:{country}</h2>
         <h2>Writer:{writer}</h2>
       </div>
-
-      <img src={images[0]} />
+      <h1>Plot:</h1>
+      <div>{plot}</div>
+      <h3>فیلم های مشابه</h3>
+      <RelatedMovie id={movie_id} />
     </Fragment>
   );
 }
