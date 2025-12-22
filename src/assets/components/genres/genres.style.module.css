@@ -1,8 +1,10 @@
 .ccc {
+  padding-top: 100px;
   width: 90%;
   margin: 0 auto;
   box-sizing: border-box;
 }
+
 .ccc ul {
   display: flex;
   flex-wrap: wrap;
@@ -15,6 +17,17 @@
 }
 .ccc ul li img {
   width: 100%;
-  height: 200px;
+  height: auto;
   border-radius: 10px;
+  transform: scale(1);
+
+  transform: translate();
+}
+.ccc ul li img:hover {
+  transform: scale(1.5);
+  transition: transform 5s ease;
+}
+.ccc ul li .imgegenres {
+  width: 100%;
+  height: 200px;
 }

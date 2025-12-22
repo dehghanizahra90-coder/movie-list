@@ -9,7 +9,7 @@ import { ShowGenres } from "./components/genres/category-genres";
 import { Movie } from "./components/movie-list/movie";
 import { MovieListCard } from "./components/list-movie-componenet/list-movie";
 import { TopMovieCard } from "./components/list-movie-componenet/list-movie-top";
-import { ShowGenress } from "./Hook/show-genres";
+import { ShowGenress } from "./components/genres/show-genres";
 export function Router() {
   return (
     <BrowserRouter>

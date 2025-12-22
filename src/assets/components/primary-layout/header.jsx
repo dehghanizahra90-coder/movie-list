@@ -1,9 +1,25 @@
 import style from "./header.style.module.css";
+import { useState, useEffect } from "react";
 
 export function Header() {
+  const [hide, setHide] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        // بعد از 100px اسکرول
+        setHide(true);
+      } else {
+        setHide(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     // <div className={style.container}>
-    <div className={style.header}>
+    <div className={`${style.header}  ${hide ? style.hidden : ""}`}>
       <div className={style.right}>
         <div className={style.logo}>
           <img src="/logo.svg" />
