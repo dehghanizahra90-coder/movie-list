@@ -27,7 +27,6 @@ export function ShowGenress() {
     try {
       setLoading(true);
       const respons = await instance.get(`genres/${name}/movies?page=${page}`);
-      setLoading(false);
       setGener(function (prev) {
         return {
           data: [...prev.data, ...respons.data.data],
@@ -35,17 +34,16 @@ export function ShowGenress() {
         };
       });
       console.log(page, "page");
+      console.log(respons.data);
+      console.log(respons.data.metadata);
       setPage(page);
-
+      setLoading(false);
       if (
         respons.data.metadata.current_page >= respons.data.metadata.page_count
       ) {
         console.log("changemore");
         setHasMore(false);
       }
-
-      console.log(respons.data);
-      console.log(respons.data.metadata);
     } catch (e) {
       console.log(e);
     }
@@ -57,26 +55,27 @@ export function ShowGenress() {
   }, []);
 
   useEffect(() => {
-    if (!hasMore) return;
-    getGenres(page + 1);
+    if (ul.current.scrollHeight < window.innerHeight) {
+      console.log("us1");
+      getGenres(page + 1);
+    } else return;
   }, [page]);
 
-  //   useEffect(() => {
-  //   function handleScroll() {
-  //     if (!ul.current || loading || !hasMore) return;
+  useEffect(() => {
+    function handleScroll() {
+      if (!ul.current || loading || !hasMore) return;
 
-  //     const bottomReached =
-  //       ul.current.scrollHeight <=
-  //       window.innerHeight + window.scrollY + 50;
+      const bottomReached =
+        ul.current.scrollHeight + window.scrollY + 50 > window.innerHeight;
 
-  //     if (bottomReached) {
-  //       getGenres(page + 1);
-  //     }
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [page, loading, hasMore]);
+      if (bottomReached) {
+        console.log(page);
+        getGenres(page + 1);
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [page, loading]);
 
   return (
     <div className="container">
