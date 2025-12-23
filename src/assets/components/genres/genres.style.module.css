@@ -15,17 +15,17 @@
 .ccc ul li {
   width: calc(20% - 15px);
 }
+.ccc ul li h5 {
+  margin: 4px 0 16px 0;
+}
 .ccc ul li img {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  transform: scale(1);
-
-  transform: translate();
+  transition: 5s ease;
 }
 .ccc ul li img:hover {
   transform: scale(1.5);
-  transition: transform 5s ease;
 }
 .ccc ul li .imgegenres {
   width: 100%;

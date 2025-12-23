@@ -8,16 +8,26 @@ ul {
   list-style: none;
 }
 body {
-  /* direction: rtl; */
   color: #f5f4f4;
   font-family: "vazirmatn", sans-serif;
   margin: 0;
 }
 .mg56 {
-  margin: 56px 0;
+  margin-top: 56px;
+}
+.mg {
+  margin: 0;
+}
+.mgb8 {
+  margin-bottom: 8px;
+}
+m .cursor {
+  cursor: pointer;
+}
+.title:hover svg {
+  fill: red;
 }
 .flex {
   display: flex;
-  /* gap: 5px; */
   align-items: center;
 }

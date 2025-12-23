@@ -16,16 +16,16 @@ export function HomePage() {
         <div className={style.bottom}>
           <Movie />
         </div>
-        <div className="flex">
-          <h2>تازه های فیلم نت</h2>
+        <div className="flex mg56 cursor title">
+          <h2 className="mg">Film News</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="30px"
             viewBox="0 -960 960 960"
             width="30px"
-            fill="#eae4e4ff"
+            fill="#fbf8f8ff"
           >
-            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
           </svg>
         </div>
         <MovieListCard page={1} />
@@ -36,23 +36,25 @@ export function HomePage() {
         </Link>
       </div>
       <div className="container">
-        <div className="flex">
-          <h2>سینما آنلاین</h2>
+        <div className="flex mg56 cursor">
+          <h2 className="mg">Online cinema</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="30px"
             viewBox="0 -960 960 960"
             width="30px"
-            fill="#eae4e4ff"
+            fill="#fbf8f8ff"
           >
-            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
           </svg>
         </div>
         <MovieListCard page={2} />
       </div>
       <div className="container">
-        <h2>پیشنهاد ویژه</h2>
-        <TopMovieCard page={10} />
+        <div className="mg56">
+          <h2 className="mg">Special offer</h2>
+          <TopMovieCard page={10} />
+        </div>
       </div>
     </Fragment>
   );

@@ -46,12 +46,13 @@ body {
   justify-content: space-between;
   padding-right: 40px;
   align-items: center;
+  cursor: pointer;
 }
-.menu .menu_list {
+.menu .menu_item {
   display: flex;
   gap: 20px;
 }
-.menu .menu_list .menu_list_sub {
+.menu .menu_item .menu_list_sub {
   display: flex;
   align-items: center;
 }
@@ -77,6 +78,54 @@ body {
   color: #fff;
 }
 .hidden {
-  transform: translateY(-100%); /* میره بالای صفحه */
-  opacity: 0; /* محو میشه */
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.categori:hover {
+  border-bottom: red solid 1px;
+  cursor: pointer;
+}
+.categori,
+.categori:visited,
+.categori:hover,
+.categori:active {
+  color: #fff;
+  text-decoration: none;
+}
+.sub_menu {
+  position: absolute;
+  top: 57%;
+  left: 16%;
+  background-color: hsl(0, 0%, 16%);
+  width: 280px;
+  padding: 10px;
+  border-radius: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: 0.5s ease;
+}
+
+.menu_list_sub:hover .sub_menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sub_menu ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.sub_menu ul li a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  font-size: 13px;
+}
+.sub_menu ul li a:hover {
+  color: #fff;
+  background-color: hsl(0, 0%, 27%);
+  border-radius: 4px;
+  width: 100%;
+  display: block;
 }

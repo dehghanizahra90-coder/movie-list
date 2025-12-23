@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import style from "./header.style.module.css";
 import { useState, useEffect } from "react";
 
@@ -6,7 +7,6 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
-        // بعد از 100px اسکرول
         setHide(true);
       } else {
         setHide(false);
@@ -25,7 +25,7 @@ export function Header() {
           <img src="/logo.svg" />
         </div>
         <div className={style.menu}>
-          <span className={style.menu_list}>
+          <span className={style.menu_item}>
             <div className={style.menu_list_sub}>
               <span>Film</span>
               <svg
@@ -37,7 +37,49 @@ export function Header() {
               >
                 <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
               </svg>
+
+              <div className={style.sub_menu}>
+                <ul>
+                  <li>
+                    <Link to="/genres/Crime">Crime</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Drama">Drama</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Action">Action</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Biography">Biography</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/History">History</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Adventure">Adventure</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Fantasy">Fantasy</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Western">Western</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Comedy">Comedy</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Family">Family</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Romance">Romance</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Mystery">Mystery</Link>
+                  </li>
+                </ul>
+              </div>
             </div>
+
             <div className={style.menu_list_sub}>
               <span>Serial</span>
               <svg
@@ -49,9 +91,51 @@ export function Header() {
               >
                 <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
               </svg>
+              <div className={style.sub_menu}>
+                <ul>
+                  <li>
+                    <Link to="/genres/Crime">Crime</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Drama">Drama</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Action">Action</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Biography">Biography</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/History">History</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Adventure">Adventure</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Fantasy">Fantasy</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Western">Western</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Comedy">Comedy</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Family">Family</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Romance">Romance</Link>
+                  </li>
+                  <li>
+                    <Link to="/genres/Mystery">Mystery</Link>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <Link to="/genres">
+              <span className={style.categori}>Category</span>
+            </Link>
 
-            <span>Category</span>
             <span>Kids</span>
             <span>National</span>
             <span>OnlineFilm</span>

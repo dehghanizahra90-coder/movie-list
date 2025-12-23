@@ -5,7 +5,7 @@ import { PrimaryLayout } from "./components/primary-layout/primary-layout";
 import { HomePage } from "./pages/home-page";
 import FormSend from "./pages/submit-movie-page";
 import { SingleMovie } from "./components/Single-page";
-import { ShowGenres } from "./components/genres/category-genres";
+import { ShowCategori } from "./components/genres/category-genres";
 import { Movie } from "./components/movie-list/movie";
 import { MovieListCard } from "./components/list-movie-componenet/list-movie";
 import { TopMovieCard } from "./components/list-movie-componenet/list-movie-top";
@@ -21,7 +21,7 @@ export function Router() {
           <Route path="/form3" element={<TopMovieCard />} />
           <Route path="/movieList" element={<MovieListCard />} />
           <Route path="/genres/:name" element={<ShowGenress />} />
-          <Route path="/genres" element={<ShowGenres />} />
+          <Route path="/genres" element={<ShowCategori />} />
           <Route path="movies/:movie_id" element={<SingleMovie />} />
           {/* <Route path="register" element={<Register />} /> */}
         </Route>

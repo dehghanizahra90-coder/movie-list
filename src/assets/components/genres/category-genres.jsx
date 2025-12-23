@@ -3,7 +3,7 @@ import instance from "../../utilites/api";
 import style from "./genres.style.module.css";
 import { Link } from "react-router-dom";
 
-export function ShowGenres() {
+export function ShowCategori() {
   const [genres, setGener] = useState([]);
 
   async function getGenres() {
@@ -20,10 +20,11 @@ export function ShowGenres() {
   }, []);
   return (
     <div className={style.ccc}>
+      <h2>Categores</h2>
       <ul>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Action`}>
+            <Link to={`/genres/Action`} title="Action">
               <img src="/image/action.jpg" />
             </Link>
           </div>
@@ -32,7 +33,7 @@ export function ShowGenres() {
 
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Adventure`}>
+            <Link to={`/genres/Adventure`} title="Adventure">
               <img src="/image/adventure.jpg" />
             </Link>
           </div>
@@ -40,7 +41,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Biography`}>
+            <Link to={`/genres/Biography`} title="Biography">
               <img src="/image/biographi.jpg" />
             </Link>
           </div>
@@ -48,7 +49,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Comedy`}>
+            <Link to={`/genres/Comedy`} title="Comedy">
               <img src="/image/comedy.jpg" />
             </Link>
           </div>
@@ -56,7 +57,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Crime`}>
+            <Link to={`/genres/Crime`} title="Crime">
               <img src="/image/crim.jpg" />
             </Link>
           </div>
@@ -64,7 +65,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Drama`}>
+            <Link to={`/genres/Drama`} title="Drama">
               <img src="/image/dddd.jpg" />
             </Link>
           </div>
@@ -72,7 +73,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Horror`}>
+            <Link to={`/genres/Horror`} title="Horror">
               <img src="/image/horror.jpg" />
             </Link>
           </div>
@@ -80,7 +81,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Music`}>
+            <Link to={`/genres/Music`} title="Music">
               <img src="/image/music.jpg" />
             </Link>
           </div>
@@ -88,7 +89,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Mystery`}>
+            <Link to={`/genres/Mystery`} title="Mystery">
               <img src="/image/mystry.jpg" />
             </Link>
           </div>
@@ -96,7 +97,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Romance`}>
+            <Link to={`/genres/Romance`} title="Romance">
               <img src="/image/romantic.jpg" />
             </Link>
           </div>
@@ -104,7 +105,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Thriller`}>
+            <Link to={`/genres/Thriller`} title="Thriller">
               <img src="/image/triller.jpg" />
             </Link>
           </div>
@@ -112,7 +113,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Western`}>
+            <Link to={`/genres/Western`} title="Western">
               <img src="/image/western.jpg" />
             </Link>
           </div>
@@ -120,7 +121,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Sport`}>
+            <Link to={`/genres/Sport`} title="Sport">
               <img src="/image/sport.jpg" />
             </Link>
           </div>
@@ -128,7 +129,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Sci-Fi`}>
+            <Link to={`/genres/Sci-Fi`} title="Sci-Fi">
               <img src="/image/sci-fi.jpg" />
             </Link>
           </div>
@@ -136,7 +137,7 @@ export function ShowGenres() {
         </li>
         <li>
           <div style={{ overflow: "hidden", borderRadius: "5px" }}>
-            <Link to={`/genres/Family`}>
+            <Link to={`/genres/Family`} title="Family">
               <img src="/image/family.jpg" />
             </Link>
           </div>
