@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import instance from "../../utilites/api";
 import style from "./list-movie-top.style.module.css";
-import { Col, Row, Tooltip } from "antd";
 import { useHoverShowInfo } from "../../Hook/hover-hook";
-import { convertMinutesStr } from "../../utilites/convertmintohour";
 import { useGetApi } from "../../Hook/get-api-hook";
+import { MovieHoverInfo } from "./movie-hover-info";
 
 export function TopMovieCard({ page }) {
   // const [movies, setMovie] = useState([]);
@@ -63,19 +62,9 @@ export function TopMovieCard({ page }) {
                 onMouseEnter={() => hoverShowInfo(id)}
               >
                 <img src={images[0]} className={style.img} />
-                {activeId === id && (
-                  <div className={style.info}>
-                    <h5>{filmInfo?.title}</h5>
-                    <h5>
-                      {filmInfo?.year}/{filmInfo?.country}
-                    </h5>
-                    <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
-                    <h5>
-                      {filmInfo?.imdb_rating}
-                      <span style={{ paddingLeft: "5px" }}>IMDB</span>
-                    </h5>
-                  </div>
-                )}
+                <div className="info">
+                  {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
+                </div>
               </div>
             </div>
           </li>

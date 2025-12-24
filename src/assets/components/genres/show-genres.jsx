@@ -3,6 +3,9 @@ import instance from "../../utilites/api";
 import { ListMovie } from "../movie-list/list-film";
 import { useParams } from "react-router-dom";
 import style from "./show-genres.style.module.css";
+import { useHoverShowInfo } from "../../Hook/hover-hook";
+import { MovieHoverInfo } from "../list-movie-componenet/movie-hover-info";
+
 import { lazy } from "react";
 
 export function ShowGenress() {
@@ -10,6 +13,7 @@ export function ShowGenress() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const { filmInfo, activeId, hoverShowInfo, setActiveId } = useHoverShowInfo();
   const ul = useRef(null);
   const [genres, setGener] = useState({
     data: [],
@@ -60,13 +64,24 @@ export function ShowGenress() {
       getGenres(page + 1);
     } else return;
   }, [page]);
-
+  // const ull=document.querySelector(".ul")
+  // ul.scrollY
   useEffect(() => {
     function handleScroll() {
       if (!ul.current || loading || !hasMore) return;
-
+      console.log("ul.current.scrollHeight", ul.current.scrollHeight);
+      console.log("ul.current.scrollY", ul.current.scrollHeight);
+      console.log("window.scrollY", window.scrollY);
+      console.log("window.innerHeight", window.innerHeight);
+      console.log(
+        "all",
+        window.innerHeight,
+        document.documentElement.clientHeight,
+        document.body.clientHeight
+      );
       const bottomReached =
-        ul.current.scrollHeight + window.scrollY + 50 > window.innerHeight;
+        window.innerHeight + window.scrollY + 50 >=
+          document.body.clientHeight && hasMore;
 
       if (bottomReached) {
         console.log(page);
@@ -83,6 +98,14 @@ export function ShowGenress() {
         {genres.data.map(function ({ id, poster, title }) {
           return (
             <li key={id} className={style.list}>
+              {/* <div
+                className={style.movieList}
+                onMouseLeave={() => setActiveId(null)}
+                onMouseEnter={() => hoverShowInfo(id)}
+              >
+                <img src={poster} loading="lazy" />
+                {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
+              </div> */}
               <div className={style.show}>
                 <img src={poster} loading="lazy" />
                 <div>
