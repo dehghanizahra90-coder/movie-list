@@ -1,81 +1,78 @@
-@font-face {
+/* @font-face {
   font-family: vazirmatn;
   src: url("/font/Vazirmatn-SemiBold.woff2") format("woff2");
-}
+} */
 body {
-  /* direction: rtl; */
   color: #f5f4f4;
-  font-family: "vazirmatn", sans-serif;
   margin: 0;
 }
-/* .container {
-  width: 70%;
-} */
-.right {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: transparent;
 }
-.logo {
-  width: 150px;
+.header {
+  display: grid;
+  align-items: center;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr) 15fr 1fr 1fr;
+  padding-top: 15px;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow: visible;
+}
+.header span {
+  font-size: 12px;
 }
 .logo img {
   display: block;
   width: 100%;
   height: auto;
+  width: 80px;
 }
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 300px;
-  /* grid-template-columns: 8rem auto max-content; */
-  font-size: 14px;
-  padding: 15px 125px;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  width: 100%;
-  height: 70px;
-
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  box-sizing: border-box;
-}
-.menu {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 40px;
-  align-items: center;
-  cursor: pointer;
-}
-.menu .menu_item {
+.menu_item {
   display: flex;
   gap: 20px;
 }
-.menu .menu_item .menu_list_sub {
+.menu_list_sub {
   display: flex;
   align-items: center;
+  position: relative;
 }
-.register {
-  display: flex;
-  align-items: center;
+.sub_menu {
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  background-color: hsl(0, 0%, 16%);
+  width: 280px;
+  padding: 10px;
+  border-radius: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: 0.5s ease;
 }
-.register button {
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "vazirmatn";
-  padding: 4px 14px;
-  font-size: 14px;
-}
-.register .sell {
+.subscrib {
   background-color: #ededed;
   border: 1px solid #ededed;
-  margin: 0 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
 }
-.register .inter {
+.signin {
   background-color: #8f8f80;
   border: 1px solid #8f8f80;
   color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
 }
 .hidden {
   transform: translateY(-100%);
@@ -92,20 +89,6 @@ body {
   color: #fff;
   text-decoration: none;
 }
-.sub_menu {
-  position: absolute;
-  top: 57%;
-  left: 16%;
-  background-color: hsl(0, 0%, 16%);
-  width: 280px;
-  padding: 10px;
-  border-radius: 6px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: 0.5s ease;
-}
-
 .menu_list_sub:hover .sub_menu {
   opacity: 1;
   visibility: visible;
@@ -128,4 +111,32 @@ body {
   border-radius: 4px;
   width: 100%;
   display: block;
+}
+.showSearch {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+}
+.searchBox {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+.searchButton {
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+.openSearch {
+  grid-template-columns: repeat(3, 1fr) 15fr 1fr 1fr;
+}
+.openSearch .menu_item {
+  display: none;
 }

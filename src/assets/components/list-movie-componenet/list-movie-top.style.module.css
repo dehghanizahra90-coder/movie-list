@@ -1,12 +1,11 @@
-.card {
-  width: 560px;
-}
+/* .card {
+} */
 .row {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-
 .movieList {
   position: relative;
   width: 100%;

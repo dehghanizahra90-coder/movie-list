@@ -1,15 +1,20 @@
 .single_movie {
   width: 100%;
   position: relative;
+  height: 720px;
+  background-repeat: no-repeat;
+  /* background-position: left; */
+  background-size: 75% 100%;
+  background-position: right center;
 }
 .single_movie::after {
   content: "";
-  background: linear-gradient(to left, rgb(28, 28, 28), rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgb(28, 28, 28), rgba(0, 0, 0, 0));
   height: 100%;
-  width: 60%;
+  width: 30%;
   position: absolute;
   bottom: 0px;
-  right: -1px;
+  left: 25%;
   z-index: 1;
 }
 .single_movie::before {
@@ -27,14 +32,16 @@
 .contents {
   color: white;
   position: absolute;
-  right: 10%;
+  left: 10%;
   top: 50%;
   z-index: 2;
-  direction: ltr;
 }
-h1 {
-  font-size: 40px;
+.imdb {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
-h2 {
-  font-size: 20px;
+.listGenres li {
+  background-color: hsl(0, 0%, 16%);
+  padding: 2px;
 }

@@ -4,7 +4,6 @@ import style from "./list-movie.style.module.css";
 import { convertMinutesStr } from "../../utilites/convertmintohour";
 import { useHoverShowInfo } from "../../Hook/hover-hook";
 import { useGetApi } from "../../Hook/get-api-hook";
-import { MovieHoverInfo } from "./movie-hover-info";
 
 export function MovieListCard({ page }) {
   const viewRef = useRef(null);
@@ -86,22 +85,19 @@ export function MovieListCard({ page }) {
                     onMouseEnter={() => hoverShowInfo(id)}
                   >
                     <img src={poster} />
-                    <div className={style.info}>
-                      {activeId === id && (
-                        <MovieHoverInfo filmInfo={filmInfo} />
-                      )}
-                      {/* //   <h5>{filmInfo?.title}</h5>
-                      //   <h5>
-                      //     {filmInfo?.year}/{filmInfo?.country}
-                      //   </h5>
-                      //   <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
-                      //   <h5>
-                      //     {filmInfo?.imdb_rating}
-                      //     <span style={{ paddingLeft: "5px" }}>IMDB</span>
-                      //   </h5>
-                       
-                    } */}
-                    </div>
+                    {activeId === id && (
+                      <div className={style.info}>
+                        <h5>{filmInfo?.title}</h5>
+                        <h5>
+                          {filmInfo?.year}/{filmInfo?.country}
+                        </h5>
+                        <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
+                        <h5>
+                          {filmInfo?.imdb_rating}
+                          <span style={{ paddingLeft: "5px" }}>IMDB</span>
+                        </h5>
+                      </div>
+                    )}
                   </div>
                   <Tooltip title={title}>
                     <div

@@ -2,6 +2,7 @@ import { convertMinutesStr } from "../../utilites/convertmintohour";
 import style from "./list-movie-top.style.module.css";
 export function MovieHoverInfo(filmInfo) {
   console.log(filmInfo.filmInfo.runtime);
+  if (!filmInfo) return null;
   const movieInfo = filmInfo.filmInfo;
   return (
     <div className={style.info}>

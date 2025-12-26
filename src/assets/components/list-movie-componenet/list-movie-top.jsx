@@ -55,16 +55,14 @@ export function TopMovieCard({ page }) {
       {topMovies.map(function ({ id, poster, title, images }) {
         return (
           <li key={id}>
-            <div className={style.card}>
-              <div
-                className={style.movieList}
-                onMouseLeave={() => setActiveId(null)}
-                onMouseEnter={() => hoverShowInfo(id)}
-              >
-                <img src={images[0]} className={style.img} />
-                <div className="info">
-                  {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
-                </div>
+            <div
+              className={style.movieList}
+              onMouseLeave={() => setActiveId(null)}
+              onMouseEnter={() => hoverShowInfo(id)}
+            >
+              <img src={images[0]} className={style.img} />
+              <div className="info">
+                {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
               </div>
             </div>
           </li>

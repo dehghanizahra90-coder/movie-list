@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import instance from "../../utilites/api";
 import { ListMovie } from "../movie-list/list-film";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./show-genres.style.module.css";
 import { useHoverShowInfo } from "../../Hook/hover-hook";
-import { MovieHoverInfo } from "../list-movie-componenet/movie-hover-info";
+import { convertMinutesStr } from "../../utilites/convertmintohour";
 
 import { lazy } from "react";
 
@@ -79,11 +79,11 @@ export function ShowGenress() {
         document.documentElement.clientHeight,
         document.body.clientHeight
       );
-      const bottomReached =
+      const bottom =
         window.innerHeight + window.scrollY + 50 >=
           document.body.clientHeight && hasMore;
 
-      if (bottomReached) {
+      if (bottom) {
         console.log(page);
         getGenres(page + 1);
       }
@@ -97,20 +97,33 @@ export function ShowGenress() {
       <ul className={style.card} ref={ul}>
         {genres.data.map(function ({ id, poster, title }) {
           return (
-            <li key={id} className={style.list}>
-              {/* <div
-                className={style.movieList}
-                onMouseLeave={() => setActiveId(null)}
-                onMouseEnter={() => hoverShowInfo(id)}
-              >
-                <img src={poster} loading="lazy" />
-                {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
-              </div> */}
-              <div className={style.show}>
-                <img src={poster} loading="lazy" />
-                <div>
-                  <h6 className="mg">{title}</h6>
+            <li key={id}>
+              <Link to={`/movies/${id}`}>
+                <div
+                  className={style.movieList}
+                  onMouseLeave={() => setActiveId(null)}
+                  onMouseEnter={() => hoverShowInfo(id)}
+                >
+                  <img src={poster} loading="lazy" />
+                  <div className="info">
+                    {activeId === id && (
+                      <div className={style.info}>
+                        <h5>{filmInfo?.title}</h5>
+                        <h5>
+                          {filmInfo?.year}/{filmInfo?.country}
+                        </h5>
+                        <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
+                        <h5>
+                          {filmInfo?.imdb_rating}
+                          <span style={{ paddingLeft: "5px" }}>IMDB</span>
+                        </h5>
+                      </div>
+                    )}
+                  </div>
                 </div>
+              </Link>
+              <div>
+                <h6 className="mg">{title}</h6>
               </div>
             </li>
           );

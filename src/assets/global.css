@@ -21,7 +21,7 @@ body {
 .mgb8 {
   margin-bottom: 8px;
 }
-m .cursor {
+.cursor {
   cursor: pointer;
 }
 .title:hover svg {
@@ -30,4 +30,25 @@ m .cursor {
 .flex {
   display: flex;
   align-items: center;
+}
+.gap10 {
+  gap: 10px;
+}
+.gap5 {
+  gap: 5px;
+}
+.alignitem {
+  align-items: center;
+}
+.pdt10 {
+  padding-top: 10px;
+}
+.fontsize5 {
+  font-size: 8px;
+}
+.width25 {
+  width: 25px;
+}
+.pdb16 {
+  padding-bottom: 16px;
 }
