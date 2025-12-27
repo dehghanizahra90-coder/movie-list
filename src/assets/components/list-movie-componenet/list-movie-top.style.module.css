@@ -1,5 +1,3 @@
-/* .card {
-} */
 .row {
   width: 100%;
   display: grid;
@@ -9,11 +7,13 @@
 .movieList {
   position: relative;
   width: 100%;
-  height: 250px;
+  aspect-ratio: 10/5;
+  /* height: 250px; */
   cursor: pointer;
   margin: 0 auto;
   margin-top: 8px;
   margin-bottom: 8px;
+  color: #fff;
 }
 .movieList img {
   width: 100%;

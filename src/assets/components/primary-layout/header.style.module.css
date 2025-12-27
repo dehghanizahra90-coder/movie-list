@@ -29,6 +29,7 @@ body {
 .header span {
   font-size: 12px;
 }
+
 .logo img {
   display: block;
   width: 100%;
@@ -139,4 +140,28 @@ body {
 }
 .openSearch .menu_item {
   display: none;
+}
+.menuMobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .menuMobile {
+    display: flex;
+    align-items: center;
+  }
+  .menu_list_sub {
+    display: none;
+  }
+  .menu_item {
+    display: none;
+  }
+  .logo img {
+    display: none;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
 }

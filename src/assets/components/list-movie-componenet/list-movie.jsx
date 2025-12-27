@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Col, Row, Tooltip, Typography } from "antd";
+import { Col, Row, Tooltip } from "antd";
 import style from "./list-movie.style.module.css";
 import { convertMinutesStr } from "../../utilites/convertmintohour";
 import { useHoverShowInfo } from "../../Hook/hover-hook";
 import { useGetApi } from "../../Hook/get-api-hook";
+import { Link } from "react-router-dom";
 
 export function MovieListCard({ page }) {
   const viewRef = useRef(null);
@@ -44,76 +45,48 @@ export function MovieListCard({ page }) {
     // <Carousel>
     <div style={{ overflow: "hidden" }}>
       <div style={{ overflowY: "hidden" }}>
-        {/* <div className={style.arrow}>
-          <button className={style.arrow_button} onClick={next}>
-            <svg
-              className={style.svg_r}
-              xmlns="http://www.w3.org/2000/svg"
-              height="15px"
-              viewBox="0 -960 960 960"
-              width="15px"
-              fill="#f3efefff"
-              strokeWidth="30"
-              stroke="#f3efefff"
-            >
-              <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
-            </svg>
-          </button>
-          <button className={style.arrow_button} onClick={prev}>
-            <svg
-              className={style.svg_l}
-              xmlns="http://www.w3.org/2000/svg"
-              height="15px"
-              viewBox="0 -960 960 960"
-              width="15px"
-              fill="#f3efefff"
-              strokeWidth="30"
-              stroke="#f3efefff"
-            >
-              <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
-            </svg>
-          </button>
-        </div> */}
         <Row gutter={15} wrap={false}>
           {movies.map(function ({ id, poster, title }) {
             return (
               <Col flex="0 0 auto" key={id}>
-                <div className={style.card}>
-                  <div
-                    className={style.movieList}
-                    onMouseLeave={() => setActiveId(null)}
-                    onMouseEnter={() => hoverShowInfo(id)}
-                  >
-                    <img src={poster} />
-                    {activeId === id && (
-                      <div className={style.info}>
-                        <h5>{filmInfo?.title}</h5>
-                        <h5>
-                          {filmInfo?.year}/{filmInfo?.country}
-                        </h5>
-                        <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
-                        <h5>
-                          {filmInfo?.imdb_rating}
-                          <span style={{ paddingLeft: "5px" }}>IMDB</span>
-                        </h5>
-                      </div>
-                    )}
-                  </div>
-                  <Tooltip title={title}>
+                <Link to={`/movies/${id}`}>
+                  <div className={style.card}>
                     <div
-                      style={{
-                        maxWidth: "180px",
-                        color: "white",
-                        direction: "ltr",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
+                      className={style.movieList}
+                      onMouseLeave={() => setActiveId(null)}
+                      onMouseEnter={() => hoverShowInfo(id)}
                     >
-                      {title}
+                      <img src={poster} />
+                      {activeId === id && (
+                        <div className={style.info}>
+                          <h5>{filmInfo?.title}</h5>
+                          <h5>
+                            {filmInfo?.year}/{filmInfo?.country}
+                          </h5>
+                          <h5>{convertMinutesStr(filmInfo?.runtime)}</h5>
+                          <h5>
+                            {filmInfo?.imdb_rating}
+                            <span style={{ paddingLeft: "5px" }}>IMDB</span>
+                          </h5>
+                        </div>
+                      )}
                     </div>
-                  </Tooltip>
-                </div>
+                    <Tooltip title={title}>
+                      <div
+                        style={{
+                          maxWidth: "180px",
+                          color: "white",
+                          direction: "ltr",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {title}
+                      </div>
+                    </Tooltip>
+                  </div>
+                </Link>
               </Col>
             );
           })}

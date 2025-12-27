@@ -4,6 +4,7 @@ import style from "./list-movie-top.style.module.css";
 import { useHoverShowInfo } from "../../Hook/hover-hook";
 import { useGetApi } from "../../Hook/get-api-hook";
 import { MovieHoverInfo } from "./movie-hover-info";
+import { Link } from "react-router-dom";
 
 export function TopMovieCard({ page }) {
   // const [movies, setMovie] = useState([]);
@@ -52,19 +53,21 @@ export function TopMovieCard({ page }) {
   );
   return (
     <ul className={style.row}>
-      {topMovies.map(function ({ id, poster, title, images }) {
+      {topMovies.map(function ({ id, images }) {
         return (
           <li key={id}>
-            <div
-              className={style.movieList}
-              onMouseLeave={() => setActiveId(null)}
-              onMouseEnter={() => hoverShowInfo(id)}
-            >
-              <img src={images[0]} className={style.img} />
-              <div className="info">
-                {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
+            <Link to={`/movies/${id}`}>
+              <div
+                className={style.movieList}
+                onMouseLeave={() => setActiveId(null)}
+                onMouseEnter={() => hoverShowInfo(id)}
+              >
+                <img src={images[0]} className={style.img} />
+                <div className="info">
+                  {activeId === id && <MovieHoverInfo filmInfo={filmInfo} />}
+                </div>
               </div>
-            </div>
+            </Link>
           </li>
         );
       })}

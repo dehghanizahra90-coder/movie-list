@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrimaryLayout } from "./components/primary-layout/primary-layout";
-import { HomePage } from "./pages/home-page";
+// import { HomePage } from "./pages/home-page";
 import FormSend from "./pages/submit-movie-page";
 import { SingleMovie } from "./components/Single-page";
 import { ShowCategori } from "./components/genres/category-genres";
@@ -10,6 +10,8 @@ import { Movie } from "./components/movie-list/movie";
 import { MovieListCard } from "./components/list-movie-componenet/list-movie";
 import { TopMovieCard } from "./components/list-movie-componenet/list-movie-top";
 import { ShowGenress } from "./components/genres/show-genres";
+import { lazy } from "react";
+const HomePage = lazy(() => import("./pages/home-page"));
 export function Router() {
   return (
     <BrowserRouter>

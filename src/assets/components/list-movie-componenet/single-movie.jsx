@@ -17,7 +17,7 @@ export function SingleMovieCard({ id }) {
   return (
     <img
       src={movie?.images[0]}
-      style={{ width: "100%", height: "400px", objectFit: "cover" }}
+      style={{ width: "100%", aspectRatio: " 10/2", objectFit: "cover" }}
     />
   );
 }

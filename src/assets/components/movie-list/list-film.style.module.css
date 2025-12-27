@@ -1,8 +1,3 @@
-/* .vige {
-  width: 90%;
-  margin: 0 auto;
-} */
-
 .vige ul {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -10,14 +5,15 @@
   padding: 0;
   list-style: none;
 }
-
 .vige ul li {
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 .vige ul li img {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 10/7;
+  /* height: 200px; */
   display: block;
   cursor: pointer;
   border-radius: 10px;
@@ -30,18 +26,38 @@
   color: #fff;
   width: 100%;
   height: 100%;
-  opacity: 0;
   transition: 0.3s;
+  opacity: 0;
+  padding: 10px;
 }
-.vige p {
+.vige h2 {
   color: #fff;
   position: relative;
   font-size: 20px;
 }
 .vige ul li .info h6 {
-  padding-right: 10px;
+  font-size: 15px;
 }
+
 .vige ul li:hover .info {
   background-color: rgb(0, 0, 0, 0.5);
   opacity: 1;
+}
+@media (max-width: 900px) {
+  .vige ul li .info h6 {
+    font-size: 12px;
+  }
+
+  .vige ul li .info p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .vige ul li .info h6 {
+    font-size: 10px;
+  }
+
+  .vige ul li .info p {
+    font-size: 12px;
+  }
 }

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: vazirmatn;
+  src: url("/font/Vazirmatn-SemiBold.woff2") format("woff2");
+}
+body {
+  background-color: rgba(28, 28, 28);
+}
+a {
+  text-decoration: none;
+}
 .container {
   width: 90%;
   margin: 0 auto;
@@ -7,11 +17,7 @@ ul {
   padding: 0;
   list-style: none;
 }
-body {
-  color: #f5f4f4;
-  font-family: "vazirmatn", sans-serif;
-  margin: 0;
-}
+
 .mg56 {
   margin-top: 56px;
 }
@@ -24,9 +30,7 @@ body {
 .cursor {
   cursor: pointer;
 }
-.title:hover svg {
-  fill: red;
-}
+
 .flex {
   display: flex;
   align-items: center;
@@ -52,9 +56,15 @@ body {
 .pdb16 {
   padding-bottom: 16px;
 }
-@media (min-width: 600px) {
-  .container {
-    width: 60%;
-    margin: 0 auto;
+.pdb5 {
+  padding-bottom: 5px;
+}
+.redHover:hover svg {
+  fill: red;
+}
+
+@media (max-width: 768px) {
+  .mg56 {
+    margin-top: 26px;
   }
 }

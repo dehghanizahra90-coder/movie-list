@@ -46,6 +46,12 @@ export function SingleMovie() {
     },
     [movie_id]
   );
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, [movie_id]);
 
   // const {
   //   title,

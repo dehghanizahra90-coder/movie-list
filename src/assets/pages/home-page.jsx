@@ -8,7 +8,7 @@ import { SingleMovieCard } from "../components/list-movie-componenet/single-movi
 import { Link } from "react-router-dom";
 import { TopMovieCard } from "../components/list-movie-componenet/list-movie-top";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <Fragment>
       <Slider />
@@ -16,7 +16,7 @@ export function HomePage() {
         <div className={style.bottom}>
           <Movie />
         </div>
-        <div className="flex mg56 cursor title">
+        <div className="flex mg56 cursor redHover">
           <h2 className="mg">Film News</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ export function HomePage() {
             <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
           </svg>
         </div>
-        <MovieListCard page={1} />
+        <MovieListCard page="1" />
       </div>
       <div className="mg56">
         <Link to="/movies/50}">
@@ -36,7 +36,7 @@ export function HomePage() {
         </Link>
       </div>
       <div className="container">
-        <div className="flex mg56 cursor">
+        <div className="flex mg56 cursor redHover">
           <h2 className="mg">Online cinema</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +55,21 @@ export function HomePage() {
           <h2 className="mg">Special offer</h2>
           <TopMovieCard page={10} />
         </div>
+      </div>
+      <div className="container">
+        <div className="flex mg56 cursor redHover">
+          <h2 className="mg">Favorite</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="30px"
+            viewBox="0 -960 960 960"
+            width="30px"
+            fill="#fbf8f8ff"
+          >
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+          </svg>
+        </div>
+        <MovieListCard page="3" />
       </div>
     </Fragment>
   );
