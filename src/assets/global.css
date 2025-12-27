@@ -52,3 +52,9 @@ body {
 .pdb16 {
   padding-bottom: 16px;
 }
+@media (min-width: 600px) {
+  .container {
+    width: 60%;
+    margin: 0 auto;
+  }
+}

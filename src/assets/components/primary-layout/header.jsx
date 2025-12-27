@@ -1,57 +1,25 @@
-import {
-  createSearchParams,
-  data,
-  Link,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./header.style.module.css";
 import { useState, useEffect } from "react";
 import { AutoComplete } from "antd";
-import instance from "../../utilites/api";
+import { useSerach } from "../../Hook/search";
+// import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const [hide, setHide] = useState(false);
-  const [options, setOptions] = useState([]);
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [movies, setMovies] = useState({
-    data: [],
-  });
-  const [queryString, setQueryString] = useSearchParams();
-  const q = queryString.get("q") ?? "";
-
-  async function handleSearch(searchText) {
-    setValue(searchText);
-    if (value.length >= 3) {
-      try {
-        const resp = await instance.get("movies", {
-          params: { q: searchText },
-        });
-        setQueryString(createSearchParams({ q: searchText }));
-        setMovies(resp.data.data);
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      setOptions([]);
-    }
-    const filtered = movies
-      .filter(function (movies) {
-        return movies.title.toLowerCase().includes(value.toLowerCase());
-      })
-      .map(function (movies) {
-        return {
-          value: movies.title,
-          label: movies.title,
-        };
-      });
-
-    setOptions(filtered);
-  }
-
+  const { handleSearch, options } = useSerach();
+  console.log("option:", options);
   const onSelect = (data) => {
     console.log("onSelect", data);
+    const movie = options.find((o) => o.value === data);
+    if (movie) {
+      navigate(`movies/${movie.id}`);
+      setOpen(false);
+    }
   };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -240,7 +208,11 @@ export function Header() {
                 className={style.searchBox}
                 options={options}
                 onSelect={onSelect}
-                onSearch={handleSearch}
+                // onSearch={handleSearch}
+                onSearch={(text) => {
+                  if (!text) return;
+                  handleSearch(text);
+                }}
                 placeholder="Search"
                 autoFocus
                 style={{
