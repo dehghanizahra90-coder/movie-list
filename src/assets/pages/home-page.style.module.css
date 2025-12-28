@@ -2,9 +2,9 @@
   margin-top: -450px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .bottom {
-    margin-top: -200px;
+    margin-top: -300px;
   }
   h2 {
     font-size: 15px;

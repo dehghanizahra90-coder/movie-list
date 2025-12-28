@@ -26,12 +26,18 @@
   height: 36%;
   background: linear-gradient(to top, hsl(0, 0%, 11%), rgba(0, 0, 0, 0));
 }
+.showInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
 .title {
   position: absolute;
   color: #fff;
   right: 10%;
   top: 39%;
-  width: 50%;
+  display: flex;
 }
 .tittle_button {
   border-radius: 5px;
@@ -46,6 +52,12 @@
 }
 .tittle_button svg {
   display: block;
+}
+.title h1 {
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .arrow {
@@ -78,7 +90,21 @@
   .title {
     position: absolute;
     right: 10%;
-    top: 46%;
+    top: 47%;
+  }
+  .title h1 {
+    font-size: 20px;
+  }
+  .arrow {
+    bottom: 30%;
+    left: 5%;
+  }
+}
+@media (max-width: 800px) {
+  .title {
+    position: absolute;
+    right: 10%;
+    top: 30%;
   }
   .arrow {
     bottom: 30%;
